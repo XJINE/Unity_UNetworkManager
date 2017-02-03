@@ -1,0 +1,2 @@
+# Unity3D_CustomNetworkManager
+NetworkManager に自動接続する機能と、ログを記録する機能を追加しています。
