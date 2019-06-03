@@ -102,14 +102,15 @@ public class UNetworkManager : NetworkManager
 
     protected virtual void Start()
     {
-        AutoStart(true);
+        Start(true);
     }
 
     protected virtual void Update()
     {
-        AutoStart();
+        Start(false);
     }
 
+    #region Status
 
     public void AddStatusMessage(string statusMessage)
     {
@@ -143,8 +144,11 @@ public class UNetworkManager : NetworkManager
         this.StatusMessages.Clear();
     }
 
+    #endregion Status
 
-    protected virtual void AutoStart(bool ignoreInterval = false)
+    #region Start / Stop
+
+    public virtual void Start(bool ignoreInterval = false)
     {
         if (!this.autoStart || this.NetworkType != UNetType.None)
         {
@@ -222,6 +226,9 @@ public class UNetworkManager : NetworkManager
         }
     }
 
+    #endregion Start / Stop
+
+    #region EventHandler
 
     // NOTE:
     // When start as Host, OnStartServer() and OnStartClient()
@@ -361,6 +368,8 @@ public class UNetworkManager : NetworkManager
 
         this.clientErrorEvent.Invoke(networkConnection);
     }
+
+    #endregion EventHandler
 
     #endregion Method
 }

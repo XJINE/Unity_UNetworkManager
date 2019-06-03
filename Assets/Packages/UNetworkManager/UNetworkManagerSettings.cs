@@ -3,9 +3,6 @@
 [System.Serializable]
 public class UNetworkManagerSettings
 {
-    // NOTE:
-    // This class is mainly used for Save & Load settings.
-
     #region Field
 
     public string   networkAddress;
@@ -32,12 +29,22 @@ public class UNetworkManagerSettings
         if (active)
         {
             uNetworkManager.Stop();
+            uNetworkManager.ClearStatusMessages();
         }
 
         uNetworkManager.networkAddress = this.networkAddress;
         uNetworkManager.networkPort    = this.networkPort;
         uNetworkManager.autoStart      = this.autoStart;
         uNetworkManager.autoStartType  = this.autoStartType;
+
+        // NOTE:
+        // It couldn't restart network in the same frame.
+        // Because of the port conflict.
+        // 
+        //if (uNetworkManager.autoStart)
+        //{
+        //    uNetworkManager.Start(true);
+        //}
     }
 
     #endregion Method
